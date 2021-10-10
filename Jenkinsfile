@@ -9,9 +9,23 @@ pipeline {
     triggers {
         pollSCM('* * * * *')
     }
-    stage ('Deploy to Production') {
+    stages{
+        stage('Build'){
+            steps {
+                bat 'mvn clean package'
+            }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+        stage ('Deploy to Production') {
         steps {
-            bat "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
+                bat "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
+            }
         }
     }
+    
 }
