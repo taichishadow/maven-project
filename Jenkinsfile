@@ -9,7 +9,7 @@ pipeline {
     triggers {
         pollSCM('* * * * *')
     }
-    stage ('Deployments') {
+    stages ('Deployments') {
         parallel {
             stage ('Deploy to Production') {
                 steps {
