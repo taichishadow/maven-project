@@ -9,13 +9,9 @@ pipeline {
     triggers {
         pollSCM('* * * * *')
     }
-    stages ('Deployments') {
-        parallel {
-            stage ('Deploy to Production') {
-                steps {
-                    bat "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
-                }
-            }
+    stage ('Deploy to Production') {
+        steps {
+            bat "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
         }
     }
 }
