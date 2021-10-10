@@ -3,23 +3,18 @@ pipeline {
     tools {
         maven 'default'
     }
-    stages{
-        stage('Build'){
-            steps {
-                bat """
-                    mvn clean package
-                """
-            }
-            post {
-                success {
-                    echo "开始存档..."
-                    archiveArtifacts artifacts: '**/target/*.war'
+    parameters {
+        string(name: 'tomcat_prod', defaultValue: '35.239.75.187', description: 'Production Server')
+    }
+    triggers {
+        pollSCM('* * * * *')
+    }
+    stage ('Deployments') {
+        parallel {
+            stage ('Deploy to Production') {
+                steps {
+                    bat "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
                 }
-            }
-        }
-        stage('Deploy to staging'){
-            steps{
-                build job: 'deploy-to-staging'
             }
         }
     }
