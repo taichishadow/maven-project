@@ -23,7 +23,7 @@ pipeline {
         }
         stage ('Deploy to Production') {
         steps {
-                sh "scp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
+                bat "winscp C:/'Program Files'/Jenkins/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
             }
         }
     }
