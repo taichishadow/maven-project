@@ -7,7 +7,7 @@ pipeline {
         string(name: 'tomcat_prod', defaultValue: '35.239.75.187', description: 'Production Server')
     }
     triggers {
-        pollSCM('* * * * *')
+        pollSCM('1 * * * *')
     }
     stages{
         stage('Build'){
