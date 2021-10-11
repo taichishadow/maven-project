@@ -23,7 +23,7 @@ pipeline {
         }
         stage ('Deploy to Production') {
         steps {
-                bat "winscp **/target/*.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
+                bat "winscp C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/workspace/FullyAutomated/webapp/target/webapp.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
             }
         }
     }
