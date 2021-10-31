@@ -23,8 +23,7 @@ pipeline {
         }
         stage ('Deploy to Production') {
         steps {
-                bat "ssh -tt taichishadow@${params.tomcat_prod}"
-                bat "scp C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\FullyAutomated\\webapp\\target\\webapp.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
+                bat "scp -i C:\\Users\\user\\.ssh\\id_rsa C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\FullyAutomated\\webapp\\target\\webapp.war taichishadow@${params.tomcat_prod}:/opt/tomcat8/webapps/"
             }
         }
     }
